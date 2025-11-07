@@ -1,7 +1,10 @@
 [project]
 name = "lab0"
 version = "0.1.0"
-description = "Add your description here"
+description = "Assignment: Fundamentals of Continuous Integration"
+authors = [
+    {name = "Ainhoa", email = "delrey.13214@8e.unavarra.es"},
+]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -11,3 +14,11 @@ dependencies = [
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
 ]
+
+[project.scripts]
+cli = "src.cli:cli"
+
+[tool.black]
+line-length = 79
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'

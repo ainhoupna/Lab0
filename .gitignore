@@ -1,0 +1,23 @@
+# Entorno Virtual uv (Gestionado por uv init/sync)
+.venv/
+uv.lock
+
+# Archivos de Python generados
+__pycache__/
+*.pyc
+*.o
+*.pyd
+*~
+
+# Archivos de Pytest y Cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Archivos del sistema operativo (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db
+
+# Logs y bases de datos locales
+*.log
+*.sqlite
