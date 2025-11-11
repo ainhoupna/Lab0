@@ -1,5 +1,5 @@
 def main():
-    print("Hello from lab0!")
+    print("Hello from lab0 of MLOPs")
 
 
 if __name__ == "__main__":
