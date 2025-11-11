@@ -16,20 +16,17 @@ def test_parse_list_argument_failure(runner: CliRunner):
     to cover the 'except json.JSONDecodeError' block."""
     invalid_json = '["a", 10' # Invalid JSON: Missing closing bracket
     
-    # We invoke a simple command that uses parse_list_argument
     result = runner.invoke(cli, ['clean', 'remove-missing', invalid_json])
     
     # Assert that the command failed (non-zero exit code)
     assert result.exit_code != 0
-    # Assert that the error message is descriptive
     assert "Must be a valid JSON list" in result.output
 
 def test_parse_numeric_argument_failure(runner: CliRunner):
     """Tests the failure path of parse_numeric_list_argument (non-numerical element) 
     to cover the internal argument validation."""
-    non_numeric_list = '["a", 10, "text"]' # Valid JSON, but contains non-numeric string
+    non_numeric_list = '["a", 10, "text"]'
     
-    # We invoke a command that uses parse_numeric_list_argument
     result = runner.invoke(cli, ['numeric', 'standardize', non_numeric_list])
     
     assert result.exit_code != 0
@@ -50,7 +47,6 @@ def test_clean_fill_missing_integration(runner: CliRunner):
     input_list_str = '["a", null, 10, ""]'
     fill_value = "MISSING"
     
-    # The fix in cli.py (type=str) allows this command to run successfully.
     result = runner.invoke(cli, ['clean', 'fill-missing', input_list_str, '--fill_value', fill_value])
     
     assert result.exit_code == 0
@@ -98,7 +94,6 @@ def test_struct_shuffle_integration(runner: CliRunner):
     result = runner.invoke(cli, ['struct', 'shuffle', input_list_str, '--seed', str(seed)])
     
     assert result.exit_code == 0
-    # Correct deterministic output for seed=42
     assert "[4, 2, 3, 5, 1]" in result.output
 
 def test_struct_flatten_integration(runner: CliRunner):
@@ -110,8 +105,6 @@ def test_struct_flatten_integration(runner: CliRunner):
     assert result.exit_code == 0
     assert "[1, 2, 3, 4, 5]" in result.output
 
-# The test for 'unique-values' is covered by clean/remove-duplicates logic, 
-# but a direct test can be included for completeness if desired.
 def test_struct_unique_values_integration(runner: CliRunner):
     """Tests 'cli struct unique-values' command."""
     input_list_str = '[1, 2, 2, "a", "a", 3]'
